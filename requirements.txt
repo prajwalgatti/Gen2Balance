@@ -1,0 +1,17 @@
+# Python deps for Gen2Balance (training / evaluation).
+# Install torch / torchvision separately with a CUDA-matched build first
+# (reference: PyTorch 2.5.1 + torchvision 0.20.1 via conda). See environment.yml.
+
+# timm: code imports timm.models.registry / timm.models.layers (removed/relocated
+# in timm >= 0.9), so this pin is load-bearing. Do not bump.
+timm==0.4.12
+decord # any recent version; build from source if no wheel
+einops==0.8.1
+tensorboardX==2.6.2.2
+wandb
+numpy==1.26.4
+pandas
+opencv-python
+scipy
+tqdm
+gdown

@@ -1,0 +1,29 @@
+# Conda environment for Gen2Balance (training / evaluation).
+# The SLURM scripts assume this environment is named `gen2bal` (they `conda activate gen2bal`).
+#
+# This mirrors the reference setup (Python 3.10 + PyTorch 2.5.1 CUDA). Install the
+# torch/torchvision build matching your CUDA version; the commands below were the
+# tested combination:
+#
+#   conda create -n gen2bal python=3.10 -y
+#   conda activate gen2bal
+#   conda install -c conda-forge "pytorch=2.5.1=*cu*"
+#   conda install --no-deps -c conda-forge torchvision=0.20.1
+#   pip install -r requirements.txt
+#
+# decord: any recent version works; `pip install decord` is fine, or build from
+# source if no wheel is available for your platform.
+#
+# timm: pinned to 0.4.12 (see requirements.txt) — the code imports
+# `timm.models.registry` / `timm.models.layers`, removed/relocated in timm >= 0.9.
+name: gen2bal
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  # installed via conda for a CUDA-matched build (see header):
+  #   - pytorch=2.5.1=*cu*
+  #   - torchvision=0.20.1
+  - pip:
+      - -r requirements.txt

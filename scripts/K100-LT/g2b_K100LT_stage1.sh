@@ -1,0 +1,81 @@
+#!/bin/bash
+#SBATCH --job-name=K100LT_stage1
+#SBATCH --output=output/K100LT/stage1/logs/%j.out
+#SBATCH --error=output/K100LT/stage1/logs/%j.err
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=20
+#SBATCH --gres=gpu:1
+#SBATCH --time=24:00:00
+
+# Path to save checkpoints
+OUTPUT_DIR='output/K100LT/stage1/'
+# Path to annotation files (train.csv/test.csv)
+DATA_PATH='data/annotations/K100-LT/balanced_330' # change to balanced for full balancing (B=990)
+# Path to K400 pretrained checkpoint for stage 1
+MODEL_PATH='checkpoints/mae_pretrain_vit_base.pth'
+
+# Root directory containing the downloaded/generated videos (see README, Data setup).
+# Annotation CSV paths are relative to this root.
+DATA_ROOT='data'
+
+# Set OpenMP threads
+export OMP_NUM_THREADS=1
+
+# Generate a random port between 20000 and 60000
+export MASTER_PORT=$(shuf -i 20000-60000 -n 1)
+
+# Print job information
+echo "Job ID: $SLURM_JOB_ID"
+echo "Job Name: $SLURM_JOB_NAME"
+echo "Node: $SLURM_NODELIST"
+echo "Output Dir: $OUTPUT_DIR"
+echo "Starting training at: $(date)"
+echo "CPUs: $SLURM_CPUS_PER_TASK"
+echo "RAM: $(($(grep MemTotal /proc/meminfo | awk '{print $2}') / 1024 / 1024))GB"
+echo "Randomly selected Master Port: $MASTER_PORT"
+echo ""
+
+# print GPU information
+nvidia-smi --list-gpus
+
+# Load environment
+source ~/miniconda3/bin/activate
+conda activate gen2bal
+cd ~/projects/Gen2Balance/ # Adjust this path to your actual Gen2Balance project directory
+
+export CUDA_VISIBLE_DEVICES=0
+
+torchrun --nproc_per_node=1 \
+    --master_port ${MASTER_PORT} run_class_finetuning.py \
+    --model vit_base_patch16_224 \
+    --data_path ${DATA_PATH} \
+    --data_root ${DATA_ROOT} \
+    --finetune ${MODEL_PATH} \
+    --log_dir ${OUTPUT_DIR} \
+    --output_dir ${OUTPUT_DIR} \
+    --data_set Kinetics-100 \
+    --nb_classes 100 \
+    --batch_size 84 \
+    --input_size 224 \
+    --short_side_size 224 \
+    --save_ckpt_freq 5 \
+    --num_frames 16 \
+    --sampling_rate 4 \
+    --num_sample 2 \
+    --opt adamw \
+    --lr 5e-3 \
+    --opt_betas 0.9 0.999 \
+    --weight_decay 0.05 \
+    --epochs 100 \
+    --test_num_segment 5 \
+    --test_num_crop 3 \
+    --partial_finetune \
+    --n_partial 1 \
+    --num_workers 10 \
+    --local_rank 0 \
+    --dist_eval \
+    --use_balanced_softmax \
+    --disable_eval_during_finetuning \
+    --ckpt_name stage1
+
+echo "Training completed at: $(date)"
