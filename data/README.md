@@ -4,7 +4,7 @@ This folder holds the **annotations** (train/test splits for the three
 benchmarks) and explains how to assemble the **videos** they reference. The repo
 does not contain the videos: the *real* clips come from the original datasets
 (Kinetics-400, UCF-101, RareAct), and the *generated* clips + model checkpoints are
-released separately (see [Released artifacts](#released-artifacts)).
+released separately (download from the [project page](https://prajwalgatti.github.io/gen2balance)).
 
 `data/` is also the **video root** (or `DATA_ROOT`), so once populated it should look like:
 

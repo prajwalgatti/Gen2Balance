@@ -1,9 +1,9 @@
 # Gen2Balance: Generative Balancing for Long-Tailed Video Action Recognition
 
-### [[Project Website :dart:]](https://prajwalgatti.github.io/gen2balance/)&nbsp;&nbsp;&nbsp;[[Paper :page_with_curl:]]()&nbsp;&nbsp;&nbsp;[Code :octocat:]
+### [[Project Website :dart:]](https://prajwalgatti.github.io/gen2balance/)&nbsp;&nbsp;&nbsp;[[Paper :page_with_curl:]](https://github.com/prajwalgatti/Gen2Balance)&nbsp;&nbsp;&nbsp;[Code :octocat:]
 
 Official code for the ECCV'26 paper [Gen2Balance: Generative
-Balancing for Long-Tailed Video Action Recognition](paper.pdf).
+Balancing for Long-Tailed Video Action Recognition](https://github.com/prajwalgatti/Gen2Balance).
 
 ---
 
@@ -121,19 +121,15 @@ Class-avg acc: 58.7%
 This code is built on top of [VideoMAE](https://github.com/MCG-NJU/VideoMAE).
 The original VideoMAE license and attribution are retained in `LICENSE` and
 `NOTICE.md`. The generation pipeline uses [Wan 2.1](https://github.com/Wan-Video/Wan2.1) for
-text-to-video synthesis (`WAN_LICENSE.txt` ships with the released data). Please
-cite VideoMAE and Wan in addition to Gen2Balance if you use this codebase.
+text-to-video synthesis. Please cite VideoMAE and Wan in addition to Gen2Balance if you use this codebase.
 
 ## License
 
-Copyright © 2026 The Gen2Balance autho. This code is derivative of
-[VideoMAE](https://github.com/MCG-NJU/VideoMAE) (© MCG-NJU) and is released under
+This code is derivative of [VideoMAE](https://github.com/MCG-NJU/VideoMAE) and is released under
 the same **CC BY-NC 4.0** terms; see [`LICENSE`](LICENSE) and [`NOTICE.md`](NOTICE.md).
-For **non-commercial research use only**.
-
-The generation pipeline and released artifacts carry their own upstream terms:
-Wan 2.1 ships `WAN_LICENSE.txt` with the released data, and the Gemini API is a
-hosted service (not redistributed code).
+For **non-commercial research use only**. The generation pipeline and released artifacts
+carry their own upstream terms: Wan 2.1 ships `WAN_LICENSE.txt` with the released data, and the Gemini API is a
+hosted service.
 
 ## Citation
 
@@ -145,3 +141,4 @@ hosted service (not redistributed code).
   year      = {2026}
 }
 ```
+
