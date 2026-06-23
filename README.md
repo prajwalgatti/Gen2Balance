@@ -1,9 +1,8 @@
 # Gen2Balance: Generative Balancing for Long-Tailed Video Action Recognition
 
-### [[Project Website :dart:]](https://prajwalgatti.github.io/gen2balance/)&nbsp;&nbsp;&nbsp;[[Paper :page_with_curl:]](https://github.com/prajwalgatti/Gen2Balance)&nbsp;&nbsp;&nbsp;[Code :octocat:]
+### [[Project Website :dart:]](https://prajwalgatti.github.io/gen2balance/)&nbsp;&nbsp;&nbsp;[[Paper :page_with_curl:]](https://arxiv.org/abs/2606.22416)&nbsp;&nbsp;&nbsp;[Code :octocat:]
 
-Official code for the ECCV'26 paper [Gen2Balance: Generative
-Balancing for Long-Tailed Video Action Recognition](https://github.com/prajwalgatti/Gen2Balance).
+Official code for the ECCV'26 paper [Gen2Balance: Generative Balancing for Long-Tailed Video Action Recognition](https://arxiv.org/abs/2606.22416).
 
 ---
 
